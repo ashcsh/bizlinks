@@ -4,11 +4,13 @@ import "./Signup.css"
 //react
 import { useState, useEffect } from "react"
 
-//signup hook
+//hooks
 import { useSignup } from "../../hooks/useSignup"
+import { useLogin } from "../../hooks/useLogin"
 
 //react-router
 import { useNavigate } from "react-router-dom"
+import Login from "../login/Login"
 
 export default function Signup() {
 
@@ -16,7 +18,8 @@ export default function Signup() {
   const navigate = useNavigate()
 
   //get error & signup function from signup hook
-  const { error, signup } = useSignup()
+  const { success, error, signup } = useSignup()
+  const { login } = useLogin()
 
   //state
   const [email, setEmail] = useState("")
@@ -30,10 +33,21 @@ export default function Signup() {
     if (!passwordError) {
       e.preventDefault()
       signup(email, password, userName)
-      alert("Account Created Succesfully")
-      navigate("/login")
     }
   }
+
+  useEffect(() => {
+    if (error) {
+      console.log(error)
+    }
+  }, [error])
+  useEffect(() => {
+    if (success) {
+      alert("Account Created Succesfully")
+      login(email,password)
+      navigate("/")
+    }
+  }, [success])
 
   //check to see if passwords match
   useEffect(() => {

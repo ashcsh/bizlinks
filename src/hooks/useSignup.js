@@ -12,6 +12,7 @@ import { doc, setDoc } from "firebase/firestore"
 export const useSignup = () => {
     //state
     const [error, setError] = useState(null)
+    const [success, setSuccess] = useState(false)
     //dispatch
     const { dispatch } = useAuthContext()
 
@@ -26,12 +27,14 @@ export const useSignup = () => {
                 console.log(res.user)
             })
             .then(res => {
+                console.log(res.user)
                 dispatch({ type: "LOGIN", payload: res.user })
+                setSuccess(true)
             })
             .catch(error => {
                 setError(error.message)
             })
     }
 
-    return { error, signup }
+    return { success, error, signup }
 }
