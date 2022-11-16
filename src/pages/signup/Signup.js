@@ -29,25 +29,26 @@ export default function Signup() {
   const [userName, setUserName] = useState("")
 
   //sign user up using email&password and store userName
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     if (!passwordError) {
       e.preventDefault()
-      signup(email, password, userName)
+      await signup(email, password, userName)
+      navigate("/myPage")
     }
   }
 
-  useEffect(() => {
-    if (error) {
-      console.log(error)
-    }
-  }, [error])
-  useEffect(() => {
-    if (success) {
-      alert("Account Created Succesfully")
-      login(email,password)
-      navigate("/")
-    }
-  }, [success])
+  // useEffect(() => {
+  //   if (error) {
+  //     console.log(error)
+  //   }
+  // }, [error])
+  // useEffect(() => {
+  //   if (success) {
+  //     alert("Account Created Succesfully")
+  //     login(email,password)
+  //     navigate("/")
+  //   }
+  // }, [success])
 
   //check to see if passwords match
   useEffect(() => {

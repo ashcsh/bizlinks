@@ -21,8 +21,8 @@ import SetupBusinessPage from "./SetupBusinessPage"
 //assets
 import AvatarPlaceholder from "../../assets/profilePhotoPlaceholder.svg"
 
-//context
-import { useAuthContext } from '../../hooks/useAuthContext'
+// //context
+// import { useAuthContext } from '../../hooks/useAuthContext'
 
 //firebase
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
@@ -42,7 +42,9 @@ export default function MyPage() {
     const [userName, setUserName] = useState(null)
     
     //get logged in user ID
-    const { user } = useAuthContext()
+    const user = JSON.parse(localStorage.getItem("userData"))
+    console.log(user)
+
 
     //get document
     const { document } = useGetDocument("users", user.uid);

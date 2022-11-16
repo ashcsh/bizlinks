@@ -18,6 +18,7 @@ export const useLogin = () => {
         setLoginError(null)
         signInWithEmailAndPassword(auth, email, password)
             .then(res => {
+                localStorage.setItem("userData", JSON.stringify(res.user))
                 dispatch({ type: "LOGIN", payload: res.user })
             })
             .catch((err) => {

@@ -18,7 +18,7 @@ export default function Login() {
   const navigate = useNavigate()
   const { loginError, login } = useLogin()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     login(email, password)
       if(!loginError) {

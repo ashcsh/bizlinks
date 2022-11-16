@@ -12,29 +12,22 @@ import { doc, setDoc } from "firebase/firestore"
 export const useSignup = () => {
     //state
     const [error, setError] = useState(null)
-    const [success, setSuccess] = useState(false)
     //dispatch
     const { dispatch } = useAuthContext()
 
-    const signup = (email, password, userName) => {
+    const signup = async (email, password, userName) => {
         setError(null)
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(res => {
-                updateProfile(auth.currentUser, { displayName: userName })
-                setDoc(doc(db, "users", res.user.uid), {
-                    userName
-                })
-                console.log(res.user)
-            })
-            .then(res => {
-                console.log(res.user)
-                dispatch({ type: "LOGIN", payload: res.user })
-                setSuccess(true)
-            })
-            .catch(error => {
-                setError(error.message)
-            })
+        const resData = await createUserWithEmailAndPassword(auth, email, password)
+        await updateProfile(auth.currentUser, { displayName: userName })
+        await setDoc(doc(db, "users", resData.user.uid), { userName })
+        if (resData.error){
+            setError(resData.error.message)
+        }else {
+
+            dispatch({ type: "LOGIN", payload: resData.user })
+        }
+
     }
 
-    return { success, error, signup }
+    return { error, signup }
 }
