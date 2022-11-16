@@ -1,0 +1,11 @@
+Model Information:
+* title:	Main phone
+* source:	https://sketchfab.com/3d-models/main-phone-ecfc198841da46659e7f38efc45060d7
+* author:	nivas (https://sketchfab.com/nivas)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Main phone" (https://sketchfab.com/3d-models/main-phone-ecfc198841da46659e7f38efc45060d7) by nivas (https://sketchfab.com/nivas) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

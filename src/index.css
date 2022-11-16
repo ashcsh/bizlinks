@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+
+body {
+    background-image: url("./assets/galaxy2.webp");
+    font-family:var(--mainFont);
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* font-family:  */
+}
+
+:root {
+    --mainTextColor: #262262;
+    --mainBackgroundColor: rgb(205, 223, 240);
+    --logoFont: "Lora";
+    --mainFont: "Oswald";
+}
+
+li, ul {
+    list-style-type: none;
+}
+
+img {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* button:active {
+
+}
+
+button:disabled {
+
+}
+
+.error {
+
+} */
+

@@ -1,0 +1,132 @@
+.navbar {
+    height: 80px;
+    width: 100%;
+    padding: 30px; 
+    border-radius: 5px 5px 20px 20px;
+    background-color:var(--mainBackgroundColor);
+    opacity: 100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mainFont);
+}
+
+.navbar a {
+    color: var(--mainTextColor);
+}
+
+.navbar a:hover {
+    color:rgb(194, 37, 13);
+}
+
+.navbar-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar-logo img {
+    width: 40px;
+    height: 40px;
+}
+.navbar-logo span {
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: var(--logoFont);
+    letter-spacing: 2px;
+    color: var(--mainTextColor);
+    cursor: pointer;
+}
+
+nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-nav {
+    display: flex;
+    gap: 3rem;
+    margin-right: 15px;
+}
+
+.conditional-nav{
+    display: flex;
+    gap: 3rem;
+    margin-left: 40px;
+}
+
+
+.nav-open, .nav-close {
+    margin-top:3px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #262262;
+    display: none;
+    font-size:1.5rem;
+} 
+
+@media only screen and (max-width: 601px){
+    nav {
+        background-color: var(--mainBackgroundColor);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 10px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        transform: translateY(-100vh);
+        z-index: 100;
+    }
+
+    nav a {
+        font-size: 1.5em;
+        margin: 1.2rem;
+        align-self: center;
+        color: #262262;
+    }
+
+    .conditional-nav{
+        justify-content: center;
+        flex-direction: column;
+        margin: 0;
+        gap:0;
+    }
+    
+    .user-nav {
+        flex-direction: column;
+        margin: 0;
+        gap:0;
+        justify-content: center;
+    }
+
+    .responsive {
+        transform: none;
+    }
+
+    .nav-close{
+        margin-top: 10px;
+        display: block;
+        width: 30px;
+        align-self: center;
+    }
+
+    .nav-open{
+        display: block;
+    }
+
+    .nav-close:hover{
+        color:rgb(194, 37, 13);
+    }
+
+    .nav-open:hover{
+        color:rgb(194, 37, 13);
+    }
+}

@@ -1,0 +1,61 @@
+body {
+    background-image: url("../../assets/galaxy2.webp");
+}
+
+.intro-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.earth {
+    width: 400px;
+    height: 400px;
+    margin-left: 50px;
+    z-index: -1;
+
+}
+
+.intro-text{
+    font-family: var(--mainFont);
+    color: rgb(205, 223, 240);
+
+}
+
+.intro-text h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 90px;
+}
+
+.intro-text p {
+    margin-top: 70px;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+@media only screen and (max-width: 800px) {
+    .intro-container {
+        flex-direction: column;
+    }
+    .earth {
+        margin: 0;
+        align-self: center;
+        grid-column: 2;
+        grid-row: 2;
+    }
+    .intro-text{
+        text-align: center;
+        margin: 20px 0px;
+        grid-column: 2;
+        grid-row: 1;
+        margin: 0px 40px;
+    }
+
+    .intro-text p {
+        font-size: 2em;
+    }
+
+}
