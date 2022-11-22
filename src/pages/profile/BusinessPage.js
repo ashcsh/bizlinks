@@ -14,6 +14,7 @@ import SetupBusinessPage from "./SetupBusinessPage"
 //icons
 import { IoBusinessSharp } from "react-icons/io5"
 import { IoLocationOutline } from "react-icons/io5"
+import { AiOutlineCloseSquare } from "react-icons/ai"
 
 
 export default function BusinessPage() {
@@ -31,6 +32,7 @@ export default function BusinessPage() {
     const [website, setWebsite] = useState(null)
     const [editMode, setEditMode] = useState(null)
     const [businessInfo, setBusinessInfo] = useState({})
+    const [viewDescription, setViewDescription] = useState(false)
 
     //set state to match business document
     useEffect(() => {
@@ -44,6 +46,7 @@ export default function BusinessPage() {
         }
     }, [document])
 
+    //activate edit mode
     const handleClick = () => {
         setBusinessInfo({
             ...businessInfo,
@@ -60,33 +63,31 @@ export default function BusinessPage() {
     return (
         <>
             {!editMode && (
-                <div id="page_container">
-                    <div id="business_left">
-                        <img src={logo} alt="logo" />
-                        <span>{name}</span>
-                        <ul>
-                            <li>
-                                <IoBusinessSharp />
-                                <span> {industry}</span>
-                            </li>
-                            <li>
-                                <IoLocationOutline />
-                                <span> {location}</span>
-                            </li>
-                        </ul>
-                        <button className="signup-btn" onClick={handleClick}>Edit Information</button>
-                    </div>
-                    <div id="business_right">
-                        <div id="description">
-                            <h3> {bdescription}</h3>
-                        </div>
-                        <div id="button-div">
-                            <a href={website}>
-                                <button className="signup-btn">Visit Website</button>
-                            </a>
+                <>
+                    <div id="business-page">
+                        <div id="business-main">
+                            <img src={logo} alt="logo" />
+                            <h2>{name}</h2>
+                            <ul>
+                                <li>
+                                    <IoBusinessSharp />
+                                    <span> {industry}</span>
+                                </li>
+                                <li>
+                                    <IoLocationOutline />
+                                    <span> {location}</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
+                    <div id="button-div">
+                        <button onClick={() => { setViewDescription(true) }}>View Description</button>
+                        <button onClick={handleClick}>Edit Information</button>
+                        <a href={website}>
+                            <button >Visit Website</button>
+                        </a>
+                    </div>
+                </>
             )}
             {editMode && (
                 <SetupBusinessPage
@@ -94,6 +95,17 @@ export default function BusinessPage() {
                     setEditMode={setEditMode}
                     businessInfo={businessInfo}
                 />
+            )}
+            {viewDescription && (
+                <div className="background">
+                    <div className="modal">
+                    <div className="close-modal" onClick={()=>setViewDescription(false)}>
+                    <AiOutlineCloseSquare/>
+                </div>
+                        <h3>{bdescription}</h3>
+                    </div>
+
+                </div>
             )}
         </>
     )

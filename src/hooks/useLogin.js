@@ -11,15 +11,18 @@ import { useAuthContext } from "./useAuthContext"
 export const useLogin = () => {
     //state  
     const [loginError, setLoginError] = useState(null)
+    const [loginSuccess, setLoginSuccess] = useState(false)
     //dispatch
     const { dispatch } = useAuthContext()
 
     const login = (email, password) => {
         setLoginError(null)
+        setLoginSuccess(false)
         signInWithEmailAndPassword(auth, email, password)
             .then(res => {
                 localStorage.setItem("userData", JSON.stringify(res.user))
                 dispatch({ type: "LOGIN", payload: res.user })
+                setLoginSuccess(true)
             })
             .catch((err) => {
                 setLoginError(err.message)
@@ -27,5 +30,5 @@ export const useLogin = () => {
             })
     }
 
-    return { loginError, login }
+    return { loginSuccess, loginError, login }
 }

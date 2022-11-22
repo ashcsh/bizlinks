@@ -13,6 +13,8 @@ import { db } from "../../firebase/config"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { storage } from "../../firebase/config"
 
+import { AiOutlineCloseSquare } from "react-icons/ai"
+
 
 export default function SetupBusinessPage(props) {
 
@@ -180,43 +182,42 @@ export default function SetupBusinessPage(props) {
             {open && (
                 <>
                     <div className="background">
-                        <div className="modal">
-                            <>
-                                <div className="close-modal" onClick={handleFakeSubmit}>
-                                    <span>x</span>
-                                </div>
-                                <span>Add image:</span>
-                                <form onSubmit={handleSubmit}>
-                                    <label>
-                                        <span>Logo</span>
-                                        {!selectedFile && <img src={LogoPlaceholder} alt="placeholder"/>}
-                                        {selectedFile && <img src={preview} alt="preview"/>}
-                                        <input type="file" onChange={handleLogoChange} style={{ display: "none" }} />
-                                    </label>
-                                    {logoError && <span>{logoError}</span>}
-                                    <label>
-                                        <span> Company Name</span>
-                                        <input required type="text" value={name} onChange={(e) => { setName(e.target.value) }} />
-                                    </label>
-                                    <label>
-                                        <span>Industry</span>
-                                        <input required type="text" value={industry} onChange={(e) => { setIndustry(e.target.value) }} />
-                                    </label>
-                                    <label>
-                                        <span>Location</span>
-                                        <input required type="text" value={location} onChange={(e) => { setLocation(e.target.value) }} />
-                                    </label>
-                                    <label>
-                                        <span>Description</span>
-                                        <textarea required type="text" value={bdescription} onChange={(e) => { setBdescription(e.target.value) }} />
-                                    </label>
-                                    <label>
-                                        <span>Website</span>
-                                        <input required type="url" value={website} onChange={(e) => { setWebsite(e.target.value) }} />
-                                    </label>
-                                    <button>Update</button>
-                                </form>
-                            </>
+                        <div className="setup-business-modal">
+
+                            <div className="close-modal" onClick={handleFakeSubmit}>
+                                <AiOutlineCloseSquare />
+                            </div>
+                            <form onSubmit={handleSubmit}>
+                                <label>
+                                    <span>click logo to change it</span>
+                                    {!selectedFile && <img src={LogoPlaceholder} alt="placeholder" />}
+                                    {selectedFile && <img src={preview} alt="preview" />}
+                                    <input type="file" onChange={handleLogoChange} style={{ display: "none" }} />
+                                </label>
+                                {logoError && <span>{logoError}</span>}
+                                <label>
+                                    <span> Company Name</span>
+                                    <input required type="text" value={name} onChange={(e) => { setName(e.target.value) }} />
+                                </label>
+                                <label>
+                                    <span>Industry</span>
+                                    <input required type="text" value={industry} onChange={(e) => { setIndustry(e.target.value) }} />
+                                </label>
+                                <label>
+                                    <span>Location</span>
+                                    <input required type="text" value={location} onChange={(e) => { setLocation(e.target.value) }} />
+                                </label>
+                                <label>
+                                    <span>Description</span>
+                                    <textarea required type="text" value={bdescription} onChange={(e) => { setBdescription(e.target.value) }} />
+                                </label>
+                                <label>
+                                    <span>Website</span>
+                                    <input required type="url" value={website} onChange={(e) => { setWebsite(e.target.value) }} />
+                                </label>
+                                <button>Update</button>
+                            </form>
+
                         </div>
                     </div>
                 </>

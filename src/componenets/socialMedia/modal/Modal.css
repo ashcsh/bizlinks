@@ -1,0 +1,116 @@
+.background {
+    opacity: 100%;
+    width: 100%;
+    height: 100vh;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    background-color: var(--mainBackgroundColor);
+
+}
+
+.modal {
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 400px;
+
+    opacity: 100%;
+    top:20%;
+    left: 40%;
+
+    background-color: aliceblue;
+    position:absolute;
+    height: max-content;
+    color: var(--mainFont);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+.setup-business-modal {
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 400px;
+
+    opacity: 100%;
+    top:15%;
+    left: 40%;
+
+    background-color: aliceblue;
+    position:absolute;
+    height: max-content;
+    color: var(--mainFont);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+.setup-business-modal button{
+    margin-bottom: 15px;
+}
+.setup-businesss-modal input {
+    width: 80%;
+}
+
+.modal button {
+    margin-bottom: 15px;
+}
+
+.modal input {
+    width: 80%;
+}
+
+.fetch {
+    width: 90%;
+    overflow: hidden;
+    background-color: var(--mainTextColor);
+    color: var(--mainBackgroundColor);
+    height: max-content;
+}
+.close-modal {
+    align-self: start;
+    margin-left: 20px;
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+textarea {
+    height: 100px;
+}
+
+@media (max-width: 900px){
+    .modal{
+        top:10%;
+        left: 25%;
+    }
+    .setup-business-modal{
+        top:10%;
+        left: 25%;
+    }
+}
+
+@media(max-width: 660px) {
+
+    .modal{
+        width: 200px;
+        height: max-content;
+        top: 20%;
+        bottom: 0%;
+        right: 0%;
+        left: 5%;
+    }
+    .setup-business-modal{
+        width: 200px;
+        height: 100vh;
+        top: 0%;
+        bottom: 0%;
+        right: 0%;
+        left: 5%;
+    }
+}

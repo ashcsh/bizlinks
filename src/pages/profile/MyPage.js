@@ -3,26 +3,28 @@ import "./MyPage.css"
 
 //react
 import { useState, useEffect } from 'react'
+import { Switch } from "@mui/material"
 
 //components
-import Linkedin from "./socials/Linkedin"
-import Facebook from "./socials/Facebook"
-import Instagram from "./socials/Instagram"
-import Twitter from "./socials/Twitter"
-import Mail from "./socials/Mail"
-import Phone from "./socials/Phone"
-import Snapchat from "./socials/Snapchat"
-import Tiktok from "./socials/Tiktok"
-import Youtube from "./socials/Youtube"
-import Custom from "./socials/Custom"
+import Linkedin from "../../componenets/socialMedia/Linkedin"
+import Facebook from "../../componenets/socialMedia/Facebook"
+import Instagram from "../../componenets/socialMedia/Instagram"
+import Twitter from "../../componenets/socialMedia/Twitter"
+import Mail from "../../componenets/socialMedia/Mail"
+import Phone from "../../componenets/socialMedia/Phone"
+import Snapchat from "../../componenets/socialMedia/Snapchat"
+import Tiktok from "../../componenets/socialMedia/Tiktok"
+import Youtube from "../../componenets/socialMedia/Youtube"
+import Custom from "../../componenets/socialMedia/Custom"
 import BusinessPage from "./BusinessPage"
 import SetupBusinessPage from "./SetupBusinessPage"
 
 //assets
 import AvatarPlaceholder from "../../assets/profilePhotoPlaceholder.svg"
+import { IoDocuments } from "react-icons/io5"
 
-// //context
-// import { useAuthContext } from '../../hooks/useAuthContext'
+//copy to clipboard function
+import { CopyToClipboard } from "react-copy-to-clipboard"
 
 //firebase
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
@@ -33,30 +35,128 @@ import { db } from "../../firebase/config"
 //hooks
 import { useGetDocument } from "../../hooks/useGetDocument"
 
+
 export default function MyPage() {
-    //state
+
+    // STATE // 
+    //user Avatar & UserName
     const [profilePhotoError, setProfilePhotoError] = useState("")
     const [avatarPhoto, setAvatarPhoto] = useState(null)
-    const [trigger, setTrigger] = useState(null)
-    const [business, setBusiness] = useState(false)
     const [userName, setUserName] = useState(null)
-    
+
+    //trigger
+    const [trigger, setTrigger] = useState(null)
+
+    //visibility settings
+    const [showBusiness, setShowBusiness] = useState(null)
+    const [showUser, setShowUser] = useState(null)
+
+    //User Profile Data
+    const [userMail, setUserMail] = useState(null)
+    const [userPhone, setUserPhone] = useState(null)
+    const [userFacebook, setUserFacebook] = useState(null)
+    const [userInstagram, setUserInstagram] = useState(null)
+    const [userSnapchat, setUserSnapchat] = useState(null)
+    const [userLinkedin, setUserLinkedin] = useState(null)
+    const [userTwitter, setUserTwitter] = useState(null)
+    const [userYoutube, setUserYoutube] = useState(null)
+    const [userTiktok, setUserTiktok] = useState(null)
+    const [userCustomUrl, setUserCustomUrl] = useState(null)
+    const [userCustomImg, setUserCustomImg] = useState(null)
+
+    //BusinessProfileData
+    const [business, setBusiness] = useState(false)
+    const [businessMail, setBusinessMail] = useState(null)
+    const [businessPhone, setBusinessPhone] = useState(null)
+    const [businessFacebook, setBusinessFacebook] = useState(null)
+    const [businessInstagram, setBusinessInstagram] = useState(null)
+    const [businessSnapchat, setBusinessSnapchat] = useState(null)
+    const [businessLinkedin, setBusinessLinkedin] = useState(null)
+    const [businessTwitter, setBusinessTwitter] = useState(null)
+    const [businessYoutube, setBusinessYoutube] = useState(null)
+    const [businessTiktok, setBusinessTiktok] = useState(null)
+
+    //clipboard bool
+    const [linkCopied, setLinkCopied] = useState(false)
+
+    //link copied 
+    useEffect(() => {
+        if (linkCopied) {
+            alert("Link Copied Successfully")
+            setLinkCopied(false)
+        }
+    }, [linkCopied])
+
     //get logged in user ID
     const user = JSON.parse(localStorage.getItem("userData"))
-    console.log(user)
 
+    //get documents
+    const { document: userSocials } = useGetDocument("users", user.uid);
+    const { document: businessSocials } = useGetDocument("business", user.uid)
 
-    //get document
-    const { document } = useGetDocument("users", user.uid);
-
-    //set state by using document data
+    //set undefined to null 
     useEffect(() => {
-        if (document) {
-            setUserName(document.userName)
-            setBusiness(document.business)
-            setAvatarPhoto(document.avatarImg)
+        if (businessSocials) {
+            if (businessSocials.showUser === undefined) {
+                setShowUser(null)
+            } else {
+                setShowUser(businessSocials.showUser)
+            }
+            if (businessSocials.publish === undefined) {
+                setShowBusiness(null)
+            } else {
+                setShowBusiness(businessSocials.publish)
+            }
         }
-    }, [document])
+    }, [businessSocials])
+
+    //get user data into state
+    useEffect(() => {
+        if (userSocials) {
+            setUserMail(userSocials.email)
+            setUserPhone(userSocials.phone)
+            setUserFacebook(userSocials.facebook)
+            setUserInstagram(userSocials.instagram)
+            setUserSnapchat(userSocials.snapchat)
+            setUserLinkedin(userSocials.linkedin)
+            setUserTwitter(userSocials.twitter)
+            setUserYoutube(userSocials.youtube)
+            setUserTiktok(userSocials.tiktok)
+            setUserCustomUrl(userSocials.customURL)
+            setUserCustomImg(userSocials.customImgURL)
+            setUserName(userSocials.userName)
+            setBusiness(userSocials.business)
+            setAvatarPhoto(userSocials.avatarImg)
+        }
+    }, [userSocials])
+
+    //get business data into state
+    useEffect(() => {
+        if (businessSocials) {
+            setBusinessMail(businessSocials.email)
+            setBusinessPhone(businessSocials.phone)
+            setBusinessFacebook(businessSocials.facebook)
+            setBusinessInstagram(businessSocials.instagram)
+            setBusinessSnapchat(businessSocials.snapchat)
+            setBusinessLinkedin(businessSocials.linkedin)
+            setBusinessTwitter(businessSocials.twitter)
+            setBusinessYoutube(businessSocials.youtube)
+            setBusinessTiktok(businessSocials.tiktok)
+        }
+    }, [businessSocials])
+
+    //add data function that gets passed on to all social components
+    const updateUrl = async (collection, socialType, newUrl) => {
+        if (newUrl === "") {
+            await setDoc(doc(db, collection, user.uid), {
+                [socialType]: null
+            }, { merge: true })
+        } else {
+            await setDoc(doc(db, collection, user.uid), {
+                [socialType]: newUrl
+            }, { merge: true })
+        }
+    }
 
     //upload photo to firebase storage
     const addAvatar = (e) => {
@@ -122,30 +222,177 @@ export default function MyPage() {
             })
     }, [trigger, imageFolderRef, user.uid])
 
+    //showBusiness button
+    const handleShowBusiness = async (e) => {
+        if (e.target.checked) {
+            await setDoc(doc(db, "business", user.uid), {
+                publish: true
+            }, { merge: true })
+        } else {
+            await setDoc(doc(db, "business", user.uid), {
+                publish: false
+            }, { merge: true })
+        }
+    }
+
+    //showUserButton
+    const handleShowUser = async (e) => {
+        if (e.target.checked) {
+            await setDoc(doc(db, "business", user.uid), {
+                showUser: true
+            }, { merge: true })
+        } else {
+            await setDoc(doc(db, "business", user.uid), {
+                showUser: false
+            }, { merge: true })
+        }
+    }
     return (
-        <div className="dashboard">
-            <div id="business-container">
+        <div className="profile-dashboard">
+
+            {business && (
+
+                <div id="link-container">
+                    {showBusiness && (
+                        <>
+                            <h2>You are now discoverable at:</h2>
+                            <CopyToClipboard
+                                text={`https://bizlinks-531f7.web.app/profile/${user.uid}`}
+                                onCopy={() => setLinkCopied(true)}
+                            >
+                                <button>
+                                    <IoDocuments size="1.5em" />
+                                </button>
+                            </CopyToClipboard>
+                        </>
+                    )
+                    }
+                    <div className="profile_settings">
+                        <label>
+                            <span>Show Business</span>
+                            <Switch
+                                checked={showBusiness}
+                                onChange={handleShowBusiness}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                                deaultChecked
+                                color="secondary"
+                            />
+                        </label>
+                        <label>
+                            <span>Show User Information</span>
+                            <Switch
+                                checked={showUser}
+                                onChange={handleShowUser}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                            />
+                        </label>
+                    </div>
+                </div>
+
+            )}
+            <>
                 {business && (
                     <>
                         <BusinessPage />
-                        <div>
-                            <Mail props={"business"} />
-                            <Phone props={"business"} />
-                            <Linkedin props={"business"} />
-                            <Twitter props={"business"} />
-                            <Facebook props={"business"} />
-                            <Instagram props={"business"} />
-                            <Snapchat props={"business"} />
-                            <Youtube props={"business"} />
-                            <Tiktok props={"business"} />
+                        <div id="business-socials">
+                            <div id="Bmail">
+                                <Mail
+                                    url={businessMail}
+                                    updateUrl={updateUrl}
+                                    dataType={"email"}
+                                    collection={"business"}
+                                    socialType={"email"}
+                                    editMode={true}
+                                />
+                            </div>
+                            <div id="Bphone">
+                                <Phone
+                                    url={businessPhone}
+                                    updateUrl={updateUrl}
+                                    dataType={"number"}
+                                    collection={"business"}
+                                    socialType={"phone"}
+                                    editMode={true}
+                                />
+                            </div>
+                            <div id="Blinkedin">
+                                <Linkedin
+                                    url={businessLinkedin}
+                                    updateUrl={updateUrl}
+                                    dataType={"url"}
+                                    collection={"business"}
+                                    socialType={"linkedin"}
+                                    editMode={true}
+                                />
+                            </div>
+                            <div id="Btwitter">
+                                <Twitter
+                                    url={businessTwitter}
+                                    updateUrl={updateUrl}
+                                    dataType={"url"}
+                                    collection={"business"}
+                                    socialType={"twitter"}
+                                    editMode={true}
+                                />
+                            </div>
+                            <div id="Bfacebook">
+                                <Facebook
+                                    url={businessFacebook}
+                                    updateUrl={updateUrl}
+                                    dataType={"url"}
+                                    collection={"business"}
+                                    socialType={"facebook"}
+                                    editMode={true}
+                                />
+                            </div>
+                            <div id="Binstagram">
+                                <Instagram
+                                    url={businessInstagram}
+                                    updateUrl={updateUrl}
+                                    dataType={"url"}
+                                    collection={"business"}
+                                    socialType={"instagram"}
+                                    editMode={true}
+                                />
+                            </div>
+                            <div id="Bsnapchat">
+                                <Snapchat
+                                    url={businessSnapchat}
+                                    updateUrl={updateUrl}
+                                    dataType={"url"}
+                                    collection={"business"}
+                                    socialType={"snapchat"}
+                                    editMode={true}
+                                />
+                            </div>
+                            <div id="Byoutube">
+                                <Youtube
+                                    url={businessYoutube}
+                                    updateUrl={updateUrl}
+                                    dataType={"url"}
+                                    collection={"business"}
+                                    socialType={"youtube"}
+                                    editMode={true}
+                                />
+                            </div>
+                            <div id="Btiktok">
+                                <Tiktok
+                                    url={businessTiktok}
+                                    updateUrl={updateUrl}
+                                    dataType={"url"}
+                                    collection={"business"}
+                                    socialType={"tiktok"}
+                                    editMode={true}
+                                />
+                            </div>
                         </div>
                     </>
                 )}
                 {!business && <SetupBusinessPage />}
-            </div>
+            </>
             <div className="profile-grid-container">
                 <div id="Avatar">
-                    <label style={{ cursor: "pointer", borderRadius: "100%", backgroundColor: "black" }}>
+                    <label id="avatar-label" >
                         {avatarPhoto && <img src={avatarPhoto} alt="avatarPhoto" />}
                         {!avatarPhoto && <img src={AvatarPlaceholder} alt="avatarPhoto" />}
                         <input style={{ display: "none" }} type="file" onChange={addAvatar} />
@@ -156,34 +403,101 @@ export default function MyPage() {
                     {userName && <h2>{userName}</h2>}
                 </div>
                 <div id="Mail">
-                    <Mail props={"users"} />
+                    <Mail
+                        url={userMail}
+                        updateUrl={updateUrl}
+                        dataType={"email"}
+                        collection={"users"}
+                        socialType={"email"}
+                        editMode={true}
+                    />
                 </div>
                 <div id="Phone">
-                    <Phone props={"users"} />
+                    <Phone
+                        url={userPhone}
+                        updateUrl={updateUrl}
+                        dataType={"number"}
+                        collection={"users"}
+                        socialType={"phone"}
+                        editMode={true}
+                    />
                 </div>
                 <div id="Linkedin">
-                    <Linkedin props={"users"} />
+                    <Linkedin
+                        url={userLinkedin}
+                        updateUrl={updateUrl}
+                        dataType={"url"}
+                        collection={"users"}
+                        socialType={"linkedin"}
+                        editMode={true}
+                    />
                 </div>
                 <div id="Twitter">
-                    <Twitter props={"users"} />
+                    <Twitter
+                        url={userTwitter}
+                        updateUrl={updateUrl}
+                        dataType={"url"}
+                        collection={"users"}
+                        socialType={"twitter"}
+                        editMode={true}
+                    />
                 </div>
                 <div id="Facebook">
-                    <Facebook props={"users"} />
+                    <Facebook
+                        url={userFacebook}
+                        updateUrl={updateUrl}
+                        dataType={"url"}
+                        collection={"users"}
+                        socialType={"facebook"}
+                        editMode={true}
+                    />
                 </div>
                 <div id="Instagram">
-                    <Instagram props={"users"} />
+                    <Instagram
+                        url={userInstagram}
+                        updateUrl={updateUrl}
+                        dataType={"url"}
+                        collection={"users"}
+                        socialType={"instagram"}
+                        editMode={true}
+                    />
                 </div>
                 <div id="Snapchat">
-                    <Snapchat props={"users"} />
+                    <Snapchat
+                        url={userSnapchat}
+                        updateUrl={updateUrl}
+                        dataType={"url"}
+                        collection={"users"}
+                        socialType={"snapchat"}
+                        editMode={true}
+                    />
                 </div>
                 <div id="Tiktok">
-                    <Tiktok props={"users"} />
+                    <Tiktok
+                        url={userTiktok}
+                        updateUrl={updateUrl}
+                        dataType={"url"}
+                        collection={"users"}
+                        socialType={"tiktok"}
+                        editMode={true}
+                    />
                 </div>
                 <div id="Youtube">
-                    <Youtube props={"users"} />
+                    <Youtube
+                        url={userYoutube}
+                        updateUrl={updateUrl}
+                        dataType={"url"}
+                        collection={"users"}
+                        socialType={"youtube"}
+                        editMode={true}
+                    />
                 </div>
                 <div id="Custom">
-                    <Custom />
+                    <Custom
+                        url={userCustomUrl}
+                        img={userCustomImg}
+                        editMode={true}
+                    />
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+import "./Modal.css"
 import { useState, useEffect } from "react"
 import { useAuthContext } from '../../../hooks/useAuthContext'
 
@@ -8,6 +9,8 @@ import ImgPlaceholder from "../../../assets/socialPhotoPlaceholder.svg"
 
 import { doc, setDoc } from "firebase/firestore"
 import { db } from "../../../firebase/config"
+
+import { AiOutlineCloseSquare } from "react-icons/ai"
 
 export default function CustomModal({ setOpen, customPhoto, customUrl }) {
 
@@ -117,20 +120,17 @@ export default function CustomModal({ setOpen, customPhoto, customUrl }) {
     return (
         <div className="background">
             <div className="modal">
-                <>
                     <div className="close-modal" onClick={() => {
                         setOpen(false)
                     }}>
-                        <span>x</span>
+                        <AiOutlineCloseSquare/>
                     </div>
                     <span>Add image:</span>
                     <form onSubmit={handleSubmit}>
                         <label style={{ width: "100px", borderRadius: 100, cursor: "pointer" }}>
                             {customPhoto && !selectedFile && <img src={customPhoto} alt="customPhoto"/>}
-                            {/* {!customPhoto &&  */}
                             {selectedFile && <img src={preview} alt="preview" style={{ height: "80px", width: "80px", borderRadius: 100 }} />}
                             {!selectedFile && !customPhoto && <img src={ImgPlaceholder} alt="placeholder" style={{ height: "80px", width: "80px" }} />}
-                            {/* } */}
                             <input type="file" style={{ display: "none" }} onChange={handleChange} />
                         </label>
                         {customPhotoError && <p>Error: {customPhotoError}</p>}
@@ -147,7 +147,6 @@ export default function CustomModal({ setOpen, customPhoto, customUrl }) {
                         </label>
                         <button>Update</button>
                     </form>
-                </>
             </div>
         </div>
     )

@@ -7,21 +7,23 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-
+    align-items: center;
 }
-
 .earth {
-    width: 400px;
-    height: 400px;
+    width: 1000px;
+    height: 1000px;
     margin-left: 50px;
-    z-index: -1;
-
+    z-index: 0;
 }
 
 .intro-text{
+    display:flex;
+    flex-direction: column;
     font-family: var(--mainFont);
     color: rgb(205, 223, 240);
-
+    font-size: 2em;
+    margin-top: -50px;
+    margin-right: 30px;
 }
 
 .intro-text h2 {
@@ -36,26 +38,92 @@ body {
     font-size: 1.3em;
 }
 
-@media only screen and (max-width: 800px) {
-    .intro-container {
-        flex-direction: column;
-    }
+@media (max-width: 1600px) {
     .earth {
-        margin: 0;
-        align-self: center;
-        grid-column: 2;
-        grid-row: 2;
+        width: 800px;
+        height: 800px;
+        margin-left: 10px;
+    }
+    .intro-text{
+        font-size: 2em;
+        margin-top: -50px;
+    }
+}
+
+@media (max-width: 1310px) {
+    .earth {
+        width: 600px;
+        height: 600px;
+    }
+    .intro-text{
+        font-size: 1.5em;
+        margin-top: -50px;
+    }
+    .intro-container {
+        margin-top: 100px;
+    }
+}
+@media (max-width: 950px) {
+    .earth {
+        width: 500px;
+        height: 500px;
+    }
+    .intro-text{
+        font-size: 1.0em;
+    }
+    .intro-container {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 880px) {
+    .earth {
+        width: 600px;
+        height: 600px;
     }
     .intro-text{
         text-align: center;
-        margin: 20px 0px;
-        grid-column: 2;
-        grid-row: 1;
-        margin: 0px 40px;
+        font-size: 1.5em;
+        margin: 0;
     }
-
-    .intro-text p {
-        font-size: 2em;
+    .intro-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-
+}
+@media (max-width: 610px) {
+    .earth {
+        width: 400px;
+        height: 400px;
+    }
+    .intro-text{
+        text-align: center;
+        font-size: 0.8em;
+        justify-content: center;
+        align-items: center;
+        margin:0;
+        margin-top: -30px;
+    }
+    .intro-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .intro-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width: 320px) {
+    .earth {
+        width: 260px;
+        height: 260px;
+    }
+    .intro-text{
+        font-size: 0.6em;
+        margin-top: -40px;     
+    }
 }

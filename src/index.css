@@ -9,7 +9,6 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    /* font-family:  */
 }
 
 :root {
@@ -33,15 +32,40 @@ a {
     text-decoration: none;
 }
 
-/* button:active {
+ button {
+    color: aliceblue;
+    background-color: var(--mainTextColor);
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    border: 1px solid var(--mainTextColor);
+    font-family: var(--mainFont);
+}
+
+button:hover {
+    background: var(--mainBackgroundColor);
+    color: var(--mainTextColor);
 
 }
 
 button:disabled {
-
+    background-color: grey;
+    color: white;
+    border: none;
+}
+input {
+    padding: 8px 6px;
+    font-size: 1em;
+    color: black;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-.error {
-
-} */
-
+input:focus {
+    color: var(--mainTextColor);
+    outline: none;
+    border: 1px solid var(--mainTextColor);
+  }

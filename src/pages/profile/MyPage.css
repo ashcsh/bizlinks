@@ -1,9 +1,9 @@
-.dashboard {
+.profile-dashboard {
     border-radius: 20px 20px 20px 20px;
     background-color:rgba(205, 223, 240, 0.9);
 
-    max-width: 1600px;
-    height: 200vh;
+    width: 100%;
+    height: max-content;
     margin: 60px auto;
     padding: 40px;
     border: 1px solid #ddd;
@@ -12,23 +12,14 @@
     flex-direction: column;
 }
 
-#business-button {
-    background: #fff;
-    padding: 30px 40px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    border: 1px solid #262262;
-    color:#262262;
+#business-socials {
+    display: flex;
 }
-#business-button span{
-    font-size: 30px;
-}
-#business-button:hover {
-    color: aliceblue;
-    background-color: #262262;
-}
+
 .profile-grid-container {
+    border-top: 10px solid var(--mainTextColor);
+    border-radius: 10px;
+    padding-top: 50px;
     margin-top: 200px;
     display: grid;
     grid-template-columns: 1.5fr 1.5fr 1fr 2fr 1fr 1.5fr 1.5fr;
@@ -36,25 +27,32 @@
     
 }
 
+.profile_settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .profile-grid-container div{
     align-self: center;
     justify-self: center;
 }
+#avatar-label{
+  border-radius: 100%;
+  background-color: var(--mainTextColor);
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 #Avatar img{
-    width: 300px;
-    height: 300px;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-}
-.dashboard img{
-    color: white;
-    height: 100px;
-    width: 100px;
-    margin: 10px 10px;
+    width: 280px;
+    height: 280px;
     border-radius: 100%;
-    box-shadow: 3px 3px 5px rgba(0, 0 , 0, 0.3);
 }
 
 #Avatar {
@@ -143,6 +141,8 @@
 }
 
 #Custom {
+    width:80px;
+    height:80px;
     grid-column-start: 4;
     grid-row-start: 5;
     justify-self: center;
@@ -152,8 +152,19 @@
 }
 
 #Custom img {
-    border-radius:0;
+    border-radius:100%;
     box-shadow: none;
+}
+
+#link-container {
+  align-self: center;
+  text-align: center;
+  border-radius: 10px;
+  opacity: 80%;
+  background-color: aliceblue;
+  height: max-content;
+  width: 50%;
+  margin-bottom: 40px;
 }
 
 @media (max-width: 1145px ) {
@@ -189,10 +200,12 @@
 
 @media (max-width: 950px ) {
     .profile-grid-container {
-        margin-top: -90px;
         display: grid;
         grid-template-columns:1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 2fr 2fr 1fr 1fr 1fr;
+    }
+    #link-container {
+      width: 70%;
     }
 
     #Avatar {
@@ -290,11 +303,6 @@
     }
     
     #Custom {
-        background: grey;
-        height: 80px;
-        width: 80px;
-        padding:20px;
-        border-radius: 200px;  
     
         grid-column-start: 2;
         grid-column-end: 4;
@@ -307,8 +315,287 @@
     
 }
 
-#business-container {
-    background-color: #cf9970;
-    border-radius: 20px;
-    border-bottom:rgba(0, 0 , 0, 0.05);
-}
+@media (max-width: 400px){
+  #avatar-label{
+    width: 170px;
+    height: 170px;
+
+  }
+    .profile-grid-container { 
+        display: grid;
+        grid-template-columns:1fr 1fr;
+        grid-template-rows: 1fr 2fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    #link-container {
+      width: 100%;
+    }
+
+    #UserName {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        justify-self: center;
+        align-self: end;
+    }
+    #Avatar {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    
+    #Phone {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        justify-self: center;
+        align-self: center;
+    }
+    #Mail {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    #Facebook {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 4;
+        grid-row-end: 5;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    #Instagram {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        grid-row-end: 5;
+        justify-self: center;
+        align-self: center;
+    }
+
+    #Snapchat {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 5;
+        grid-row-end: 6;
+        justify-self: center;
+        align-self: center;
+    }
+
+    #Linkedin {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 5;
+        grid-row-end: 6;
+        justify-self: center;
+        align-self: center;
+    }
+    #Twitter {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 6;
+        grid-row-end: 7;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    #Tiktok {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 6;
+        grid-row-end: 7;
+        justify-self: center;
+        align-self: center;
+    }
+    #Youtube {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 7;
+        grid-row-end: 8;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    #Custom {
+        border-radius: 200px;  
+    
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 7;
+        grid-row-end: 8;
+        justify-self: center;
+        align-self: center;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        background-color: antiquewhite;
+    }
+  }
+
+  /* Business Socials */
+
+  #business-socials {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  #Bmail {
+    grid-row-start:1;
+    grid-column-start:1;
+  }
+
+  #Bphone {
+    grid-row-start:2;
+    grid-column-start:2;
+  }
+
+  #Blinkedin {
+    grid-row-start:1;
+    grid-column-start:3;
+  }
+
+  #Btwitter {
+    grid-row-start:2;
+    grid-column-start:4;
+  }
+
+  #Bfacebook {
+    grid-row-start:1;
+    grid-column-start:5;
+  }
+
+  #Binstagram {
+    grid-row-start:2;
+    grid-column-start:6;
+  }
+
+  #Bsnapchat {
+    grid-row-start:1 ;
+    grid-column-start:7 ;
+  }
+
+  #Byoutube {
+    grid-row-start:2;
+    grid-column-start:8;
+  }
+
+  #Btiktok {
+    grid-row-start:1;
+    grid-column-start:9;
+  }
+
+
+  @media (max-width: 714px) {
+    #business-socials {
+        grid-template-rows: repeat(5, 1fr);
+        grid-template-columns: repeat(5, 1fr);
+    }
+    #Bphone {
+      grid-row-start:1;
+      grid-column-start:3;
+    }
+    #Bmail {
+        grid-row-start:2;
+        grid-column-start:2;
+      }
+    
+    
+      #Blinkedin {
+        grid-row-start:3;
+        grid-column-start:1;
+      }
+    
+      #Btwitter {
+        grid-row-start:3;
+        grid-column-start:3;
+      }
+    
+      #Bfacebook {
+        grid-row-start:3;
+        grid-column-start:5;
+      }
+    
+      #Binstagram {
+        grid-row-start:2;
+        grid-column-start:4;
+      }
+    
+      #Bsnapchat {
+        grid-row-start:4 ;
+        grid-column-start:2 ;
+      }
+    
+      #Byoutube {
+        grid-row-start:4;
+        grid-column-start:4;
+      }
+    
+      #Btiktok {
+        grid-row-start:5;
+        grid-column-start:3;
+      }
+
+  }
+
+  @media (max-width: 437px) {
+    #business-socials {
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
+    }
+    #Bphone {
+      grid-row-start:1;
+      grid-column-start:3;
+    }
+    #Bmail {
+        grid-row-start:2;
+        grid-column-start:2;
+      }
+    
+    
+      #Blinkedin {
+        grid-row-start:6;
+        grid-column-start:2;
+      }
+    
+      #Btwitter {
+        grid-row-start:3;
+        grid-column-start:3;
+      }
+    
+      #Bfacebook {
+        grid-row-start:6;
+        grid-column-start:4;
+      }
+    
+      #Binstagram {
+        grid-row-start:2;
+        grid-column-start:4;
+      }
+    
+      #Bsnapchat {
+        grid-row-start:4 ;
+        grid-column-start:2 ;
+      }
+    
+      #Byoutube {
+        grid-row-start:4;
+        grid-column-start:4;
+      }
+    
+      #Btiktok {
+        grid-row-start:5;
+        grid-column-start:3;
+      }
+
+  }

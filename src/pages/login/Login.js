@@ -16,23 +16,29 @@ export default function Login() {
   const [password, setPassword] = useState("")
 
   const navigate = useNavigate()
-  const { loginError, login } = useLogin()
+  const { loginSuccess, loginError, login } = useLogin()
 
-  const handleSubmit = async (e) => {
+  //handle login submit
+  const handleSubmit =  (e) => {
     e.preventDefault()
     login(email, password)
-      if(!loginError) {
-        console.log("aici", loginError)
-      }else {
-        navigate("/")
-      }
   }
 
+  //navigate on success
   useEffect(() => {
-    
-  })
+    if (loginSuccess) {
+      navigate("/mypage")
+    }
+  }, [loginSuccess])
 
-  
+  //show error
+  useEffect(() => {
+    if (loginError) {
+      console.log("There was an error regarding your login.")
+    }
+  }, [loginError])
+
+
 
   return (
     <div className="login-container">
@@ -56,7 +62,7 @@ export default function Login() {
             value={password}
           />
         </label>
-        <button className="login-btn">Login</button>
+        <button>Login</button>
         {loginError && <p>{loginError}</p>}
       </form>
     </div>

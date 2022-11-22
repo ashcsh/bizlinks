@@ -11,6 +11,7 @@ export const useLogout = () => {
         signOut(auth)
             .then(() => {
                 dispatch({ type: "LOGOUT" })
+                localStorage.setItem("userData", null)
             })
             .catch(error => {
                 console.log(error.message)

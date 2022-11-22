@@ -83,7 +83,7 @@ nav{
         justify-content: center;
         transition: 1s;
         transform: translateY(-100vh);
-        z-index: 100;
+        z-index: 1;
     }
 
     nav a {
@@ -114,7 +114,7 @@ nav{
     .nav-close{
         margin-top: 10px;
         display: block;
-        width: 30px;
+        width: 50px;
         align-self: center;
     }
 
@@ -129,4 +129,5 @@ nav{
     .nav-open:hover{
         color:rgb(194, 37, 13);
     }
+
 }

@@ -48,17 +48,17 @@ export default function Navbar() {
             </div>
             <nav ref={toggleRef}>
                 <div className="conditional-nav">
+                    <Link to="/dashboard">Dashboard</Link>
                     {user &&
                         <>
-                            <Link to="/">Dashboard</Link>
-                            <Link to="/myPage">Profile</Link>
+                            <Link to="/myPage">My Page</Link>
                         </>}
                 </div>
                 <div className="user-nav">
                     {!user && (
                         <>
-                            <Link to="/login">Login</Link>
-                            <Link to="/signup">Signup</Link>
+                            <Link to="/login" onClick={toggle}>Login</Link>
+                            <Link to="/signup" onClick={toggle}>Signup</Link>
                         </>)}
                     {user && <Link onClick={handleClick}>Logout</Link>}
                     <button className="nav-close" onClick={toggle}>

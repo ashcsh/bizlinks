@@ -6,11 +6,9 @@ import { useState, useEffect } from "react"
 
 //hooks
 import { useSignup } from "../../hooks/useSignup"
-import { useLogin } from "../../hooks/useLogin"
 
 //react-router
 import { useNavigate } from "react-router-dom"
-import Login from "../login/Login"
 
 export default function Signup() {
 
@@ -19,7 +17,6 @@ export default function Signup() {
 
   //get error & signup function from signup hook
   const { success, error, signup } = useSignup()
-  const { login } = useLogin()
 
   //state
   const [email, setEmail] = useState("")
@@ -29,26 +26,27 @@ export default function Signup() {
   const [userName, setUserName] = useState("")
 
   //sign user up using email&password and store userName
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     if (!passwordError) {
       e.preventDefault()
-      await signup(email, password, userName)
-      navigate("/myPage")
+      signup(email, password, userName)
     }
   }
 
-  // useEffect(() => {
-  //   if (error) {
-  //     console.log(error)
-  //   }
-  // }, [error])
-  // useEffect(() => {
-  //   if (success) {
-  //     alert("Account Created Succesfully")
-  //     login(email,password)
-  //     navigate("/")
-  //   }
-  // }, [success])
+  //handle error
+  useEffect(() => {
+    if (error) {
+      console.log(error)
+    }
+  }, [error])
+
+  //success alert & redirect
+  useEffect(() => {
+    if (success) {
+      alert("Account Created Succesfully")
+      navigate("/mypage")
+    }
+  }, [success])
 
   //check to see if passwords match
   useEffect(() => {
